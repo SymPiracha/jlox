@@ -1,0 +1,29 @@
+# Ignore compiled class files
+*.class
+
+# Ignore generated directories
+bin/
+
+# Ignore JARs or compiled libraries (if any)
+*.jar
+*.war
+*.ear
+
+# IDE specific files (for IntelliJ, Eclipse, etc.)
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# MacOS specific files
+.DS_Store
+
+# Ignore Maven or Gradle build directories if you're using them
+/target/
+/build/
