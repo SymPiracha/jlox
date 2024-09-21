@@ -6,7 +6,7 @@ This project is guided by the book *Crafting Interpreters* by Robert Nystrom.
 
 ## Overview
 
-`jlox` is a Java implementation of the `lox` programming language, which is a simple, dynamic language designed to illustrate how interpreters work. The project follows along with the examples and structure laid out in *Crafting Interpreters*, providing an educational experience in building interpreters from the ground up.
+`jlox` is a Java implementation of the `lox` programming language, which is a simple, dynamic language designed to illustrate how interpreters work. The project follows along with the examples and structure laid out in *Crafting Interpreters*.\
 
 ## Features
 
