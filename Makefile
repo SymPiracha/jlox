@@ -1,12 +1,12 @@
 # Variables
 JAVAC = javac
 JAVA = java
-SRC_DIR = src
+SRC_DIR = src/lox
 BIN_DIR = bin
 LIB_DIR = lib
 TEST_DIR = test
-MAIN_CLASS = App
-SRC_FILES = $(SRC_DIR)/$(MAIN_CLASS).java
+MAIN_CLASS = lox.Lox
+SRC_FILES = $(SRC_DIR)/*.java
 TEST_FILES = $(TEST_DIR)/*.java
 JUNIT_JAR = $(LIB_DIR)/junit-jupiter-api-5.11.0.jar:$(LIB_DIR)/junit-platform-console-standalone-1.11.0.jar:$(LIB_DIR)/junit-platform-launcher-1.11.0.jar
 
