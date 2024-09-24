@@ -2,11 +2,14 @@
 JAVAC = javac
 JAVA = java
 SRC_DIR = src/lox
+TOOL_SRC_DIR = src/tool
 BIN_DIR = bin
 LIB_DIR = lib
 TEST_DIR = test
 MAIN_CLASS = lox.Lox
+TOOL_MAIN_CLASS = tool.GenerateAst
 SRC_FILES = $(SRC_DIR)/*.java
+TOOL_SRC_FILES = $(TOOL_SRC_DIR)/*.java
 TEST_FILES = $(TEST_DIR)/*.java
 JUNIT_JAR = $(LIB_DIR)/junit-jupiter-api-5.11.0.jar:$(LIB_DIR)/junit-platform-console-standalone-1.11.0.jar:$(LIB_DIR)/junit-platform-launcher-1.11.0.jar
 
@@ -18,6 +21,11 @@ $(BIN_DIR)/$(MAIN_CLASS).class: $(SRC_FILES)
 	@mkdir -p $(BIN_DIR)
 	$(JAVAC) -d $(BIN_DIR) $(SRC_FILES)
 
+# Compile the tool
+tool-compile:
+	@mkdir -p $(BIN_DIR)
+	$(JAVAC) -d $(BIN_DIR) $(TOOL_SRC_FILES)
+
 # Compile tests
 test-compile:
 	@mkdir -p $(BIN_DIR)
@@ -26,6 +34,10 @@ test-compile:
 # Run the application
 run: all
 	$(JAVA) -cp $(BIN_DIR) $(MAIN_CLASS)
+
+# Run the tool, passing the src/lox directory as the output directory
+tool-run: tool-compile
+	$(JAVA) -cp $(BIN_DIR) $(TOOL_MAIN_CLASS) $(SRC_DIR)
 
 # Run JUnit tests
 test: test-compile
