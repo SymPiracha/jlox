@@ -78,7 +78,10 @@ public class Scanner {
             case '/':
                 if (match('/')) {
                     while (peek() != '\n' && !isAtEnd()) advance();
+                } else {
+                    addToken(TokenType.SLASH);
                 }
+                break;
             case ' ':
             case '\r':
             case '\t':
