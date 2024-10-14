@@ -135,6 +135,12 @@ public class Interpreter implements Expr.Visitor<Object>,
         return null;
     }
 
+    public Object visitAssignExpr(Expr.Assign expr) {
+        Object value = evaluate(expr.value);
+        environment.assign(expr.name, value);
+        return value;
+    }
+
     private boolean isTruthy(Object object) {
         if (object == null) return false;
         if (object instanceof Boolean) return (boolean)object;
