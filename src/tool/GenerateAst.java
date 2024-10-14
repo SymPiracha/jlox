@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.io.IOException;
 
 public class GenerateAst {
-    public static void main(String [] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         if (args.length != 1) {
             System.err.println("Usage: generate_ast <output directory>");
             System.exit(64);
@@ -14,19 +14,18 @@ public class GenerateAst {
         String outputDir = args[0];
 
         defineAst(outputDir, "Expr", Arrays.asList(
-            "Assign : Token name, Expr value",
-            "Binary   : Expr left, Token operator, Expr right",
-            "Grouping : Expr expression",
-            "Literal  : Object value",
-            "Variable : Token name",
-            "Unary    : Token operator, Expr right"
-        ));
+                "Assign : Token name, Expr value",
+                "Binary   : Expr left, Token operator, Expr right",
+                "Grouping : Expr expression",
+                "Literal  : Object value",
+                "Variable : Token name",
+                "Unary    : Token operator, Expr right"));
 
         defineAst(outputDir, "Stmt", Arrays.asList(
-            "Expression : Expr expression",
-            "Var             : Token name, Expr initializer",
-            "Print           : Expr expression"
-        ));
+                "Block : List<Stmt> statements",
+                "Expression      : Expr expression",
+                "Var             : Token name, Expr initializer",
+                "Print           : Expr expression"));
     }
 
     private static void defineAst(String outputDir, String baseName, List<String> types) throws IOException {
@@ -42,7 +41,7 @@ public class GenerateAst {
         defineVisitor(writer, baseName, types);
 
         // The AST classes
-        for (String type: types) {
+        for (String type : types) {
             String className = type.split(":")[0].trim();
             String fields = type.split(":")[1].trim();
             defineType(writer, baseName, className, fields);
@@ -56,21 +55,21 @@ public class GenerateAst {
     }
 
     private static void defineType(
-        PrintWriter writer, String baseName,
-        String className, String fieldList) {
+            PrintWriter writer, String baseName,
+            String className, String fieldList) {
         writer.println("  static class " + className + " extends " +
-            baseName + " {");
-    
+                baseName + " {");
+
         // Constructor.
         writer.println("    " + className + "(" + fieldList + ") {");
-    
+
         // Store parameters in fields.
         String[] fields = fieldList.split(", ");
         for (String field : fields) {
             String name = field.split(" ")[1];
             writer.println("      this." + name + " = " + name + ";");
         }
-  
+
         writer.println("    }");
 
         // Visitor pattern.
@@ -78,28 +77,28 @@ public class GenerateAst {
         writer.println("    @Override");
         writer.println("    <R> R accept(Visitor<R> visitor) {");
         writer.println("      return visitor.visit" +
-            className + baseName + "(this);");
+                className + baseName + "(this);");
         writer.println("    }");
-  
+
         // Fields.
         writer.println();
         for (String field : fields) {
             writer.println("    final " + field + ";");
         }
-    
+
         writer.println("  }");
     }
 
     private static void defineVisitor(
-        PrintWriter writer, String baseName, List<String> types) {
-      writer.println("  interface Visitor<R> {");
-  
-      for (String type : types) {
-        String typeName = type.split(":")[0].trim();
-        writer.println("    R visit" + typeName + baseName + "(" +
-            typeName + " " + baseName.toLowerCase() + ");");
-      }
-  
-      writer.println("  }");
+            PrintWriter writer, String baseName, List<String> types) {
+        writer.println("  interface Visitor<R> {");
+
+        for (String type : types) {
+            String typeName = type.split(":")[0].trim();
+            writer.println("    R visit" + typeName + baseName + "(" +
+                    typeName + " " + baseName.toLowerCase() + ");");
+        }
+
+        writer.println("  }");
     }
 }
