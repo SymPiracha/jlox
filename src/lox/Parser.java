@@ -5,16 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import static lox.TokenType.*;
 
-/**
- * expression    → equality ;
- * equality      → comparison ( ( "!=" | "==" ) comparison )* ;
- * comparison    → term ( ( ">" | ">=" | "<" | "<=" ) term )* ;
- * term          → factor ( ( "-" | "+" ) factor )* ;
- * factor        → unary ( ( "/" | "*" ) unary )* ;
- * unary         → ( "!" | "-" ) unary | primary ;
- *  primary       → "false" | "true" | "nil" | NUMBER | STRING | "(" expression ")" ;
- */
-
 class Parser {
     private static class ParseError extends RuntimeException {}
     private final List<Token> tokens;
