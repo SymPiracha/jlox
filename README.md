@@ -30,6 +30,18 @@ To compile the project:
 make
 ```
 
+### Running the interpreter
+
+The interpreter operates in two modes:
+
+1.	Interactive Mode (runPrompt) – Allows you to execute logic via the terminal interactively.
+2.	File Mode (runFile) – Runs an entire Lox script from a file.
+
+```bash
+make run ARGS="lox.txt"
+```
+To run the interpreter in interactive mode, simply omit the ARGS argument.
+
 ## Grammar
 
 ```

@@ -35,7 +35,7 @@ test-compile:
 
 # Run the application
 run: all
-	$(JAVA) -cp $(BIN_DIR) $(MAIN_CLASS)
+	$(JAVA) -cp $(BIN_DIR) $(MAIN_CLASS) $(ARGS)
 
 # Run the tool, passing the src/lox directory as the output directory
 tool-run: tool-compile
